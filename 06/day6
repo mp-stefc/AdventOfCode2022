@@ -1,0 +1,23 @@
+def find_token(line, i, size):
+    while i < len(line):
+        #print(i);
+        window = line[i:(i+size)]
+        unique = set(window)
+        if len(unique) == size:
+            print(window)
+            return i+size
+        i = i+1
+
+def find_packet(line, i):
+    return find_token(line, i, 4)
+
+def find_message(line, i):
+    return find_token(line, i, 14)
+
+
+with open("input", "r") as f:
+    line = f.readline()
+    payload_start=find_packet(line,0)
+    result = find_message(line,payload_start)
+
+    print(result)
